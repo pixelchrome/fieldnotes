@@ -28,5 +28,8 @@ Icon
 .com.apple.timemachine.donotpresent
 
 node_modules
+package.json
+package-lock.json
+
 rsync_to_work.sh
 rsync_to_priv.sh
