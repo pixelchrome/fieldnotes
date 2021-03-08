@@ -1,7 +1,7 @@
 ---
-title: "Toolbox"
-linkTitle: "Toolbox"
-weight: 999
+title: "Rancher"
+linkTitle: "Rancher"
+weight: 180
 ---
 
 {{% pageinfo %}}

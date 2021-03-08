@@ -1,7 +1,7 @@
 ---
 title: "Mining"
 linkTitle: "Mining"
-weight: 99
+weight: 130
 ---
 
 {{% pageinfo %}}

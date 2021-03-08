@@ -1,7 +1,7 @@
 ---
-title: "Toolbox"
-linkTitle: "Toolbox"
-weight: 999
+title: "Kubernetes"
+linkTitle: "Kubernetes"
+weight: 110
 ---
 
 {{% pageinfo %}}
