@@ -1,5 +1,5 @@
 ---
-title: "Howto convert a single disk zroot into a mirrored"
+title: "FreeBSD: Howto convert a single disk zroot into a mirrored"
 linkTitle: "Convert a single disk into a mirror"
 weight: 40
 ---

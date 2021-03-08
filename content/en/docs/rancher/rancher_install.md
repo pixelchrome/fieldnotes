@@ -69,3 +69,6 @@ deployment "rancher" successfully rolled out
 # Use the Browser to login!
 
 https://rancher.\<domain>
+
+# Links
+* https://rancher.com/docs/rancher/v2.x/en/installation/install-rancher-on-k8s/
