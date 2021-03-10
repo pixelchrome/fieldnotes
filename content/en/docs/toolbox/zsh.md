@@ -33,8 +33,29 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
+### Edit `.zshrc`
+
+```
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
+
 ### Configure Theme
 
 ```sh
+source ~/.zshrc
+```
+
+If necessary
+
+```sh
 p10k configure
+```
+
+## Add Plugins
+
+### Edit `.zshrc`
+
+```
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ```
