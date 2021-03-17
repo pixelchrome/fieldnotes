@@ -8,7 +8,9 @@ weight: 6
 
 | Command | Info |
 |---------|------|
-| `export KUBECONFIG=$(pwd)/kube_config.yml` | Set the enviroment variable for `kubectl` | 
+| `export KUBECONFIG=$(pwd)/kube_config.yml` | Set the enviroment variable for `kubectl` |
+| copy kubeconfig to clipboard `pbpaste > kubeconfig.yml` & `export KUBECONFIG=$(pwd)/kubeconfig.yml` | Set the enviroment variable for `kubectl` |
+| `kubectl get all --all-namespaces` | Get all informations about all namespaces |
 
 ## Ingress
 
