@@ -45,6 +45,8 @@ brew install kubectl
 
 # Install Docker
 
+Check [here](https://github.com/rancher/install-docker) for the latest version of the install script
+
 ```sh
 curl https://releases.rancher.com/install-docker/20.10.sh | sh
 ```
