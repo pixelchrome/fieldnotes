@@ -84,7 +84,7 @@ DISPLAY=:0 XAUTHORITY=$XAUTH nvidia-settings -c :0 -a [gpu:0]/GPUGraphicsClockOf
 ```bash
 #!/bin/bash
 
-## run `nvidia-xconfig --enable-all-gpus``
+## run `nvidia-xconfig --enable-all-gpus`
 ## add `Option "Coolbits" "24"` to `/usr/share/X11/xorg.conf.d/10-nvidia.conf`
 
 XAUTH=`pgrep -af Xauthority | awk {' print $7 }'`
