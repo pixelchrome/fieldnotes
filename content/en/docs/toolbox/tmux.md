@@ -20,3 +20,10 @@ I am using `xpanes` when I need to connect to more than one host via `ssh`
 ```sh
 xpanes -t -C 3 -c "ssh -l harry {}" rke{1..3}
 ```
+
+### Copy SSH-Key to several hosts
+
+```sh
+xpanes -t -C 3 -c "ssh-copy-id -l ubuntu@{}" clupi{1..6}
+```
+
