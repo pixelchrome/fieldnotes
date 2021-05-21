@@ -17,11 +17,27 @@ brew install k3sup
 
 ### Prerequisites
 
+#### SSH
+
 Prepare the Cluster Hosts and add the copy ssh key with `ssh-copy-id` or if you have `tmux` installed
 
 ```sh
-xpanes -t -C 3 -c "ssh-copy-id -l ubuntu@{}" clupi{1..6}
+xpanes -t -C 3 -c "ssh-copy-id pi@{}" clupi{1..6}
 ```
+
+##### Use the right SSH Key!
+
+{{% alert title="Attention!" %}}
+> `k3sup` uses by default `id_rsa` (and not `id_ed25519`). Be aware if the right key is used.
+{{% /alert %}}
+
+Error Message `Error: unable to connect to (server) clupi1:22 over ssh: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey], no supported methods remain`
+
+1. Run your `k3sup` commands with the option `--ssh-key ~/.ssh/id_ed25519` (e.g. `k3sup install --ip $IP --user pi --ssh-key ~/.ssh/id_ed25519`)
+2. Use `ssh-copy-id` with the `-i ~/.ssh/id_rsa`
+
+See this [issue](https://github.com/alexellis/k3sup/issues/99) for more details
+
 
 #### Raspberry Pi
 
@@ -36,6 +52,13 @@ Ubuntu `/boot/firmware/cmddline.txt`
 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 ```
 
+##### Disable Swap
+
+`/etc/dphys-swapfile``
+```sh
+CONF_SWAPSIZE=0
+```
+
 *Reboot*
 
 ### Run `k3sup` 
@@ -43,7 +66,7 @@ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 #### Install 1st Master
 
 ```sh
-k3sup install --ip 192.168.11.101 --user ubuntu
+k3sup install --ip 192.168.11.101 --user pi
 ```
 
 ##### Check
@@ -60,7 +83,7 @@ clupi1   Ready    master   107s   v1.19.10+k3s1   192.168.11.101   <none>       
 #### Join a Node
 
 ```sh
-k3sup join --ip 192.168.11.103 --server-ip 192.168.11.101 --user ubuntu
+k3sup join --ip 192.168.11.103 --server-ip 192.168.11.101 --user pi
 ```
 
 #### Check
@@ -80,7 +103,7 @@ Note the `--cluster`flag
 
 ```sh
 export SERVER_IP=192.168.11.101
-export USER=ubuntu
+export USER=pi
 
 k3sup install \
   --ip $SERVER_IP \
@@ -92,7 +115,7 @@ k3sup install \
 
 ```sh
 export SERVER_IP=192.168.11.101
-export USER=ubuntu
+export USER=pi
 export NEXT_SERVER=192.168.11.102
 
 k3sup join \
@@ -112,26 +135,30 @@ k3sup join --ip 192.168.11.104 --server-ip 192.168.11.101 --user ubuntu
 ##### Example all in one
 
 ```sh
-k3sup install --ip 192.168.11.106 --user ubuntu
+k3sup install --ip 192.168.11.106 --user pi
 export KUBECONFIG=/Users/harry/kubeconfig
 kubectl config set-context default
-k3sup join --ip 192.168.11.105 --server-ip 192.168.11.106 --user ubuntu
-k3sup join --ip 192.168.11.104 --server-ip 192.168.11.106 --user ubuntu
-k3sup join --ip 192.168.11.103 --server-ip 192.168.11.106 --user ubuntu
-3sup join --ip 192.168.11.102 --server-ip 192.168.11.106 --user ubuntu
-k3sup join --ip 192.168.11.101 --server-ip 192.168.11.106 --user ubuntu
+k3sup join --ip 192.168.11.105 --server-ip 192.168.11.106 --user pi
+k3sup join --ip 192.168.11.104 --server-ip 192.168.11.106 --user pi
+k3sup join --ip 192.168.11.103 --server-ip 192.168.11.106 --user pi
+k3sup join --ip 192.168.11.102 --server-ip 192.168.11.106 --user pi
+k3sup join --ip 192.168.11.101 --server-ip 192.168.11.106 --user pi
 ```
 
 ##### Example all in one (HA)
 
 ```sh
-k3sup install --ip 192.168.11.102 --user ubuntu --cluster
-k3sup join --ip 192.168.11.104 --server-ip 192.168.11.102 --user ubuntu
-k3sup join --ip 192.168.11.103 --user ubuntu --server-user ubuntu --server-ip 192.168.11.102 --server
-k3sup join --ip 192.168.11.105 --server-ip 192.168.11.102 --user ubuntu
-k3sup join --ip 192.168.11.106 --server-ip 192.168.11.102 --user ubuntu
-k3sup join --ip 192.168.11.101 --user ubuntu --server-user ubuntu --server-ip 192.168.11.102 --server
+k3sup install --host clupi1 --user pi --cluster
+k3sup join --host clupi2 --server-host clupi1 --user pi --server
+k3sup join --host clupi3 --server-host clupi1 --user pi --server
+k3sup join --host clupi4 --server-host clupi1 --user pi
+k3sup join --host clupi5 --server-host clupi1 --user pi
+k3sup join --host clupi6 --server-host clupi1 --user pi
 ```
+
+### Label **worker** nodes
+
+`kubectl label node ${node} node-role.kubernetes.io/worker=worker`
 
 ## Uninstall k3s
 
