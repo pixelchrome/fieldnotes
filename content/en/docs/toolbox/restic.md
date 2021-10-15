@@ -6,7 +6,7 @@ weight: 80
 
 # Using [restic](https://restic.net) as a backuptool for servers
 
-Hetzner is offering a 'Storagebox' included with dedicated server (100GB). But is also for other use cases available.
+In this example I use a Hetzner 'Storagebox'. It is included with dedicated server (100GB). But it is also available for other use cases.
 
 # Install `restic`
 
@@ -103,3 +103,28 @@ Added to the repo: 1.949 GiB
 processed 32089 files, 2.220 GiB in 1:16
 snapshot d43223e8 saved
 ```
+
+# Automate with a script
+
+```sh
+#!/bin/bash
+
+#source .restic-keys
+export RESTIC_REPOSITORY="sftp:storage-box:./restic"
+
+echo -e "\n`date` - Starting backup...\n"
+
+restic --exclude={/dev,/media,/mnt,/proc,/run,/sys,/tmp,/var/tmp} backup /
+
+# mysqldump database | restic backup --stdin --stdin-filename database.sql
+
+echo -e "\n`date` - Running forget and prune...\n"
+
+restic forget --prune --keep-daily 7 --keep-weekly 4 --keep-monthly 12
+
+echo -e "\n`date` - Backup finished.\n"
+```
+
+# Links
+* https://stanislas.blog/2018/07/backup-servers-using-restic-wasabi-object-storage/
+* http://zockertown.de/s9y/index.php?/archives/1736-Backup-mit-restic.html
