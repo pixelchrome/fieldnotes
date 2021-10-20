@@ -45,6 +45,6 @@ Install the Software for the **Blinkt!** LED Bar from [Pimoroni](https://learn.p
 curl https://get.pimoroni.com/blinkt | bash
 ```
 
-{% alert title="Tip" %}}
+{{% alert title="Tip" %}}
 > This script doesnt work on a 64-Bit Version of raspbian. But it is possible to install the library with `sudo apt-get install python3-blinkt`
 {{% /alert %}}
