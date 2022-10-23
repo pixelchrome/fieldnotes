@@ -1,6 +1,6 @@
 ---
-title: "House"
-linkTitle: "House"
+title: "Ansible"
+linkTitle: "Ansible"
 weight: 30
 ---
 

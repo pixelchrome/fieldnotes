@@ -41,15 +41,27 @@ See this [issue](https://github.com/alexellis/k3sup/issues/99) for more details
 
 #### Raspberry Pi
 
+Use a 64-Bit Linux!
+
 **!!! Important**
 
-Add the line below to the first line of:
+##### `cgroups v1` - like Debian Buster
 
-Raspbian `/boot/cmdline.txt`
-Ubuntu `/boot/firmware/cmddline.txt`
+Add the following bellow options to: 
+
+* Raspbian `/boot/cmdline.txt`
+* Ubuntu `/boot/firmware/cmddline.txt`
+
+***ALL IN ONE LINE***
 
 ```sh
 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
+```
+
+##### `cgroups v2` - like Debian Bullseye
+
+```sh
+systemd.unified_cgroup_hierarchy=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 ```
 
 ##### Disable Swap
@@ -148,17 +160,28 @@ k3sup join --ip 192.168.11.101 --server-ip 192.168.11.106 --user pi
 ##### Example all in one (HA)
 
 ```sh
-k3sup install --host clupi1 --user pi --cluster
-k3sup join --host clupi2 --server-host clupi1 --user pi --server
-k3sup join --host clupi3 --server-host clupi1 --user pi --server
-k3sup join --host clupi4 --server-host clupi1 --user pi
-k3sup join --host clupi5 --server-host clupi1 --user pi
-k3sup join --host clupi6 --server-host clupi1 --user pi
+k3sup install --host clupi1 --user pi --cluster && export KUBECONFIG=/Users/harry/kubeconfig \
+kubectl config set-context default \
+kubectl get node -o wide \
+k3sup join --host clupi2 --server-host clupi1 --user pi --server && k3sup join --host clupi3 --server-host clupi1 --user pi --server && k3sup join --host clupi4 --server-host clupi1 --user pi && k3sup join --host clupi5 --server-host clupi1 --user pi && k3sup join --host clupi6 --server-host clupi1 --user pi \
+for i in {1..6}
+do
+kubectl label node clupi$i node-role.kubernetes.io/worker=worker
+done
 ```
 
 ### Label **worker** nodes
 
 `kubectl label node ${node} node-role.kubernetes.io/worker=worker`
+
+##### Example
+
+```sh
+for i in {1..6}
+do
+kubectl label node clupi$i node-role.kubernetes.io/worker=worker
+done
+```
 
 ## Uninstall k3s
 

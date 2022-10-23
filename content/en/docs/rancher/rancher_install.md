@@ -91,6 +91,8 @@ deployment "rancher" successfully rolled out
 
 ## Use the Browser to login!
 
+It is important to use the correct host-/domainname
+
 https://rancher.\<domain>
 
 ## Links

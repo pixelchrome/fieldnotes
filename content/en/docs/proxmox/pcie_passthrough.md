@@ -26,7 +26,7 @@ Add the following to `/etc/kernel/cmdline`
     * `amd_iommu=on`
 
 ```sh
-cat /etc/kernel/cmdline 
+cat /etc/kernel/cmdline
 root=ZFS=rpool/ROOT/pve-1 boot=zfs intel_iommu=on
 ```
 
@@ -162,7 +162,7 @@ Check with `lspci -nnk` --> `Kernel driver in use: vfio-pci`
 
 ## Install a VM
 
-Set **q35** as machine type, **OVMF (EFI for VMs)** as BIOS 
+Set **q35** as machine type, **OVMF (EFI for VMs)** as BIOS
 
 ![VM Install 1](/notes/images/vm_pcie_1.png)
 

@@ -13,7 +13,29 @@ Here I collect useful tools for traveling
 
 ## Hardware
 
-* Powerbank
+* Mobile
+* Powerbank (+ Cables/Adapter)
 * Router
 * DSL Modem
+* Network Cables (min 2x)
 * USB Sticks / SSDs
+
+## Tools
+
+* Multitool - Leatherman
+* 1st Aid-Kit
+    * Aspirin
+    * Kohletabletten
+    * Zovirax
+    * Fusspilzcreme
+    * Augentropfen - Bepanthen
+* Flashlight
+* Whistle
+* Bivy Bag Ultra Light
+
+## Other
+
+* Battery Radio
+* Rope
+* Tape
+* Lighter/Matches
