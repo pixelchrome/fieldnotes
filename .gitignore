@@ -27,6 +27,10 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 
+# Hugo
+
+.hugo_build.lock
+
 node_modules
 package.json
 package-lock.json

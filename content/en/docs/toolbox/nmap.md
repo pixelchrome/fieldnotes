@@ -4,7 +4,13 @@ weight: 30
 ---
 # NMAP
 
-Enumerate Ciphers (currently TLS 1.3 is not in the actual nmap version included)
+## Scan a network for new devices
+
+```sh
+nmap -sn 192.168.1.0/24 | grep -i <device>
+```
+
+## Enumerate Ciphers (currently TLS 1.3 is not in the actual nmap version included)
 
 ```sh
 nmap --script ssl-enum-ciphers -p 443 <IP>
